@@ -79,7 +79,7 @@ public class ProductRepositoryTests : IClassFixture<DatabaseFixture>
         await _context.SaveChangesAsync();
 
         // Act - Берем первую страницу с размером 2
-        var result = await _repository.GetPaginatedAsync(pageNumber: 1, pageSize: 2);
+        var result = await _repository.GetAllPaginatedAsync(pageNumber: 1, pageSize: 2);
 
         // Assert
         Assert.Equal(3, result.TotalItems);

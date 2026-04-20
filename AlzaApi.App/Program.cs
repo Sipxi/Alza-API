@@ -1,6 +1,6 @@
+using AlzaApi.BL.Interfaces;
+using AlzaApi.BL.Services;
 using AlzaApi.DAL;
-using AlzaApi.DAL.Interfaces;
-using AlzaApi.DAL.Repositories;
 using AlzaApi.DAL.Seeds;
 
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +18,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 
 var app = builder.Build();

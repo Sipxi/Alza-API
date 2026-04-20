@@ -9,6 +9,6 @@ public interface IBaseRepository<TEntity> where TEntity : BaseEntity
 {
     Task<IEnumerable<TEntity>> GetAllAsync();
     Task<TEntity?> GetByIdAsync(Guid id);
-    Task<PaginatedResult<TEntity>> GetPaginatedAsync(int pageNumber, int pageSize);
+    Task<PaginatedResult<TEntity>> GetAllPaginatedAsync(int pageNumber, int pageSize);
     Task UpdateAsync(TEntity entity);
 }

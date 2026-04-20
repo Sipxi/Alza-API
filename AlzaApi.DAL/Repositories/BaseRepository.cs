@@ -28,7 +28,8 @@ public abstract class BaseRepository<TBaseEntity> : IBaseRepository<TBaseEntity>
         return _dbSet.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
     }
 
-    public async Task<PaginatedResult<TBaseEntity>> GetPaginatedAsync(int pageNumber, int pageSize)
+    public async Task<PaginatedResult<TBaseEntity>> GetAllPaginatedAsync(int pageNumber, int 
+            pageSize)
     {
         var query = _dbSet.AsNoTracking();
         var totalCount = await query.CountAsync();
