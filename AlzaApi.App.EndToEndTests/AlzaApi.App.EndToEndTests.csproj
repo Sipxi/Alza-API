@@ -18,4 +18,8 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\AlzaApi.App\AlzaApi.App.csproj" />
+    </ItemGroup>
+
 </Project>

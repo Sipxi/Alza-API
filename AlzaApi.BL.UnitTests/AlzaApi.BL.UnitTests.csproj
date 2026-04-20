@@ -18,4 +18,9 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\AlzaApi.BL\AlzaApi.BL.csproj" />
+      <ProjectReference Include="..\AlzaApi.Common\AlzaApi.Common.csproj" />
+    </ItemGroup>
+
 </Project>

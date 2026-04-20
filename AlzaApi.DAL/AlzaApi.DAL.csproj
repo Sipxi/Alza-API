@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\AlzaApi.Common\AlzaApi.Common.csproj" />
+    </ItemGroup>
+
 </Project>
