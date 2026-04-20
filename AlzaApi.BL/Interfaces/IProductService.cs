@@ -7,6 +7,6 @@ public interface IProductService
 {
     Task<IEnumerable<ProductListDto>> GetAllAsync();   
     Task<ProductDetailDto?> GetByIdAsync(Guid id);
-    Task<bool> UpdateAsync(Guid id, ProductUpdateDto updateDto);
+    Task<bool> UpdateDescriptionAsync(Guid id, string description);
     Task<PaginatedResult<ProductListDto>> GetAllPaginatedAsync(int pageNumber, int pageSize);
 }
