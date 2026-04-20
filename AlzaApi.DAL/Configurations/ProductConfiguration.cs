@@ -33,7 +33,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         // Description
         builder.Property(p => p.Description)
             .HasMaxLength(1000);
-        
+
         // Creating, in bigger systems can centralize this
         builder.Property(p => p.CreatedAt)
             .HasDefaultValueSql("GETUTCDATE()");
