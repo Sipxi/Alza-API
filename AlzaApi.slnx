@@ -1,0 +1,9 @@
+<Solution>
+  <Project Path="AlzaApi.App.EndToEndTests/AlzaApi.App.EndToEndTests.csproj" />
+  <Project Path="AlzaApi.App/AlzaApi.App.csproj" />
+  <Project Path="AlzaApi.BL.UnitTests/AlzaApi.BL.UnitTests.csproj" />
+  <Project Path="AlzaApi.BL/AlzaApi.BL.csproj" />
+  <Project Path="AlzaApi.Common/AlzaApi.Common.csproj" />
+  <Project Path="AlzaApi.DAL.IntegrationTests/AlzaApi.DAL.IntegrationTests.csproj" />
+  <Project Path="AlzaApi.DAL/AlzaApi.DAL.csproj" />
+</Solution>
