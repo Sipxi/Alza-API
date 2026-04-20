@@ -21,7 +21,7 @@ public class ProductService(IProductRepository productRepository) : IProductServ
         return product?.Adapt<ProductDetailDto>();
     }
 
-    public async Task<bool> UpdateAsync(Guid id, ProductUpdateDto updateDto)
+    public async Task<bool> UpdateDescriptionAsync(Guid id, string description)
     {
         var product = await productRepository.GetByIdAsync(id);
         if (product is null)
@@ -29,7 +29,7 @@ public class ProductService(IProductRepository productRepository) : IProductServ
             return false;
         }
 
-        await productRepository.UpdateProductDescriptionAsync(id, updateDto.Description);
+        await productRepository.UpdateProductDescriptionAsync(id, description);
         return true;
     }
 

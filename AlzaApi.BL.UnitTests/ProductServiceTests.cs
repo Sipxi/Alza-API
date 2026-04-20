@@ -72,10 +72,9 @@ public class ProductServiceTests
             .Setup(repo => repo.GetByIdAsync(It.IsAny<Guid>()))
             .ReturnsAsync((Product?) null);
 
-        var updateDto = new ProductUpdateDto { Description = "New Desc" };
-
+        string description = "New Desc";
         // Act
-        var result = await _productService.UpdateAsync(Guid.NewGuid(), updateDto);
+        var result = await _productService.UpdateDescriptionAsync(Guid.NewGuid(), description);
 
         // Assert
         Assert.False(result);
@@ -96,10 +95,10 @@ public class ProductServiceTests
             .Setup(repo => repo.GetByIdAsync(productId))
             .ReturnsAsync(productEntity);
 
-        var updateDto = new ProductUpdateDto { Description = "New Desc" };
+        string description = "New Desc";
 
         // Act
-        var result = await _productService.UpdateAsync(productId, updateDto);
+        var result = await _productService.UpdateDescriptionAsync(productId, description);
 
         // Assert
         Assert.True(result);
