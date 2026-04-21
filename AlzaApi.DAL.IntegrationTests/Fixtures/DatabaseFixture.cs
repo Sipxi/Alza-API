@@ -1,6 +1,5 @@
-﻿using AlzaApi.DAL;
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace AlzaApi.DAL.IntegrationTests.Fixtures;
 
@@ -8,19 +7,20 @@ public class DatabaseFixture : IDisposable
 {
     public AppDbContext Context { get; }
 
-    // Используем твою третью базу для тестов
-    private const string _connString =
-        "Server=SIPXI-LAPTOP;Database=AlzaDb_Test;Trusted_Connection=True;TrustServerCertificate=True;";
-
     public DatabaseFixture()
     {
+        var config = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.Test.json")
+            .Build();
+
+        string connString = config.GetConnectionString("TestConnection")
+                            ?? throw new InvalidOperationException("TestConnection not found.");
+
         var options = new DbContextOptionsBuilder<AppDbContext>()
-            .UseSqlServer(_connString)
+            .UseSqlServer(connString)
             .Options;
 
         Context = new AppDbContext(options);
-
-        // After the test, delete and recreate
         Context.Database.EnsureDeleted();
         Context.Database.EnsureCreated();
     }
@@ -29,5 +29,6 @@ public class DatabaseFixture : IDisposable
     {
         Context.Database.EnsureDeleted();
         Context.Dispose();
+        GC.SuppressFinalize(this);
     }
 }
