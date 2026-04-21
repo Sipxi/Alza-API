@@ -23,14 +23,7 @@ public class ProductService(IProductRepository productRepository) : IProductServ
 
     public async Task<bool> UpdateDescriptionAsync(Guid id, string description)
     {
-        var product = await productRepository.GetByIdAsync(id);
-        if (product is null)
-        {
-            return false;
-        }
-
-        await productRepository.UpdateProductDescriptionAsync(id, description);
-        return true;
+        return await productRepository.UpdateProductDescriptionAsync(id, description);
     }
 
     public async Task<PaginatedResult<ProductListDto>> GetAllPaginatedAsync(int pageNumber, int
