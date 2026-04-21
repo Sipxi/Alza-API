@@ -133,3 +133,7 @@ $RECYCLE.BIN/
 .DS_Store
 
 _NCrunch*
+
+# Other files and folders to ignore
+appsettings.Production.json
+appsettings.Test.json
