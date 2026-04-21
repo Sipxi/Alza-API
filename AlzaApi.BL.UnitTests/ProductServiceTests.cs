@@ -69,19 +69,18 @@ public class ProductServiceTests
     {
         // Arrange
         _mockRepository
-            .Setup(repo => repo.GetByIdAsync(It.IsAny<Guid>()))
-            .ReturnsAsync((Product?) null);
+            .Setup(repo =>
+                repo.UpdateProductDescriptionAsync(It.IsAny<Guid>(), It.IsAny<string>()))
+            .ReturnsAsync(false);
 
-        string description = "New Desc";
         // Act
-        var result = await _productService.UpdateDescriptionAsync(Guid.NewGuid(), description);
+        var result = await _productService.UpdateDescriptionAsync(Guid.NewGuid(), "New Desc");
 
         // Assert
         Assert.False(result);
-
         _mockRepository.Verify(
             repo => repo.UpdateProductDescriptionAsync(It.IsAny<Guid>(), It.IsAny<string>()),
-            Times.Never);
+            Times.Once);
     }
 
     [Fact]
@@ -89,21 +88,19 @@ public class ProductServiceTests
     {
         // Arrange
         var productId = Guid.NewGuid();
-        var productEntity = new Product { Id = productId, Name = "Test" };
+        string description = "New Desc";
 
         _mockRepository
-            .Setup(repo => repo.GetByIdAsync(productId))
-            .ReturnsAsync(productEntity);
-
-        string description = "New Desc";
+            .Setup(repo => repo.UpdateProductDescriptionAsync(productId, description))
+            .ReturnsAsync(true);
 
         // Act
         var result = await _productService.UpdateDescriptionAsync(productId, description);
 
         // Assert
         Assert.True(result);
-
-        _mockRepository.Verify(repo => repo.UpdateProductDescriptionAsync(productId, "New Desc"),
+        _mockRepository.Verify(
+            repo => repo.UpdateProductDescriptionAsync(productId, description),
             Times.Once);
     }
 
