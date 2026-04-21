@@ -1,20 +1,23 @@
 ﻿using System.Net;
+
+using AlzaApi.Common.Exceptions;
+
 using Microsoft.AspNetCore.Diagnostics;
-using AlzaApi.Common.Exceptions; 
+using Microsoft.AspNetCore.Mvc;
 
 namespace AlzaApi.App.Middleware;
 
 public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(
-        HttpContext context, 
-        Exception exception, 
+        HttpContext context,
+        Exception exception,
         CancellationToken cancellationToken)
     {
         var (statusCode, message) = exception switch
         {
-            NotFoundException => ((int)HttpStatusCode.NotFound, exception.Message),
-            _ => ((int)HttpStatusCode.InternalServerError, "An unexpected error occurred.")
+            NotFoundException => ((int) HttpStatusCode.NotFound, exception.Message),
+            _ => ((int) HttpStatusCode.InternalServerError, "An unexpected error occurred.")
         };
 
         logger.LogError(exception, "Exception occurred: {Message}", exception.Message);
@@ -22,15 +25,14 @@ public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IE
         context.Response.StatusCode = statusCode;
         context.Response.ContentType = "application/json";
 
-        var response = new 
-        { 
-            status = statusCode,
-            message = message 
+        var response = new ProblemDetails
+        {
+            Status = statusCode,
+            Title = message
         };
 
         await context.Response.WriteAsJsonAsync(response, cancellationToken);
 
-        // Возвращаем true, чтобы конвейер знал, что ошибка обработана
         return true;
     }
 }
