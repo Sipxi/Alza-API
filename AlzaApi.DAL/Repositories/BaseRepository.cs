@@ -40,10 +40,5 @@ public abstract class BaseRepository<TBaseEntity> : IBaseRepository<TBaseEntity>
             .ToListAsync();
         return new PaginatedResult<TBaseEntity>(items, totalCount, pageNumber, pageSize);
     }
-
-    public Task UpdateAsync(TBaseEntity entity)
-    {
-        _dbSet.Update(entity);
-        return _dbContext.SaveChangesAsync();
-    }
+    
 }

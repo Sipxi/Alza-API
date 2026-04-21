@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DebugSymbols>false</DebugSymbols>
+      <DocumentationFile>bin\Debug\AlzaApi.Common.xml</DocumentationFile>
+    </PropertyGroup>
+
 </Project>

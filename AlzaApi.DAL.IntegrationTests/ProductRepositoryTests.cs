@@ -78,37 +78,13 @@ public class ProductRepositoryTests : IClassFixture<DatabaseFixture>
         await _context.Products.AddRangeAsync(products);
         await _context.SaveChangesAsync();
 
-        // Act - Берем первую страницу с размером 2
+        // Act
         var result = await _repository.GetAllPaginatedAsync(pageNumber: 1, pageSize: 2);
 
         // Assert
         Assert.Equal(3, result.TotalItems);
         Assert.Equal(2, result.Items.Count());
         Assert.Equal(2, result.TotalPages);
-    }
-
-    [Fact]
-    public async Task UpdateAsync_ShouldUpdateWholeEntity()
-    {
-        // Arrange
-        var id = Guid.NewGuid();
-        var product = new Product { Id = id, Name = "Old Name", Price = 10, ImgUri = "url" };
-        await _context.Products.AddAsync(product);
-        await _context.SaveChangesAsync();
-
-        // Detach to simulate getting from frontend
-        _context.Entry(product).State = EntityState.Detached;
-
-        // Act
-        var updatedProduct = new Product
-            { Id = id, Name = "New Name", Price = 999, ImgUri = "new_url" };
-        await _repository.UpdateAsync(updatedProduct);
-
-        // Assert
-        var dbItem = await _context.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
-        Assert.NotNull(dbItem);
-        Assert.Equal("New Name", dbItem.Name);
-        Assert.Equal(999, dbItem.Price);
     }
 
     [Fact]
