@@ -47,7 +47,7 @@ public class ProductController(IProductService productService) : ControllerBase
     /// Updates the description of a product.
     /// </summary>
     /// <param name="id">The unique identifier of the product.</param>
-    /// <param name="description">The new description to assign.</param>
+    /// <param name="updateDto">The new description for the product.</param>
     /// <response code="204">Description updated successfully.</response>
     /// <response code="404">Product with the specified ID was not found.</response>
     /// <response code="400">Description is null or invalid.</response>
@@ -55,9 +55,9 @@ public class ProductController(IProductService productService) : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> UpdateDescription(Guid id, [FromBody] string description)
+    public async Task<IActionResult> UpdateDescription(Guid id, [FromBody] ProductUpdateDto updateDto)
     {
-        var success = await productService.UpdateDescriptionAsync(id, description);
+        var success = await productService.UpdateDescriptionAsync(id, updateDto.Description);
         if (!success) return NotFound();
         return NoContent();
     }
