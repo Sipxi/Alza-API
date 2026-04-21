@@ -4,5 +4,5 @@ namespace AlzaApi.DAL.Interfaces;
 
 public interface IProductRepository : IBaseRepository<Product>
 {
-    Task UpdateProductDescriptionAsync(Guid productId, string description);
+    Task<bool> UpdateProductDescriptionAsync(Guid productId, string description);
 }
