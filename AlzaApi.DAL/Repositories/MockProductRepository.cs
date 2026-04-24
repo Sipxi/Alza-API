@@ -1,6 +1,4 @@
-﻿// AlzaApi.DAL/Repositories/MockProductRepository.cs
-
-using AlzaApi.Common.Models;
+﻿using AlzaApi.Common.Models;
 using AlzaApi.DAL.Entities;
 using AlzaApi.DAL.Interfaces;
 using AlzaApi.DAL.Seeds;
